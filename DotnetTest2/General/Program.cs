@@ -15,7 +15,7 @@ namespace ProgrammingTestTasks
                 Console.Clear();
                 Console.WriteLine("=== Programming Test: Combined Tasks ===");
                 Console.WriteLine("1. Divisibility Check (3 or 5) & Sum");
-                Console.WriteLine("2. Generate Fibonacci");
+                Console.WriteLine("2. Generate First 15 Fibonacci");
                 Console.WriteLine("3. Exit");
                 Console.Write("\nSelect an option (1-3): ");
 
@@ -67,24 +67,26 @@ namespace ProgrammingTestTasks
         {
             Console.Clear();
             Console.WriteLine("--- Fibonacci Task ---");            
-            long n1 = 0, n2 = 1; // Using 'long' for larger numbers
-            List<long> matches = new List<long>();
-            try
-            {            
-                for (int i = 0; i < 15; i++)
-                {
-                    matches.Add(n1);
-                    long next = n1 + n2;
-                    n1 = n2;
-                    n2 = next;  
-                }
-                
-                Console.WriteLine("\n" + string.Join(", ", matches));
-            }
-            catch (Exception ex)
+            string fileName = "Fibonacci.txt";
+            int count = 15;
+            
+            int n1 = 0, n2 = 1, n3;
+            using (StreamWriter writer = new StreamWriter(fileName))
             {
-                Console.WriteLine($"Error saving file: {ex.Message}");
+                writer.WriteLine("First 15 Fibonacci Numbers:");
+                
+                writer.Write(n1);
+                writer.Write("," +n2);
+                for (int i = 2; i < count; i++)
+                {
+                    n3 = n1 + n2;
+                    writer.Write("," +n3);
+                    n1 = n2;
+                    n2 = n3;
+                }
             }
+
+            Console.WriteLine($"Successfully saved to {fileName}");
 
             Console.WriteLine("\nPress any key to return to menu...");
             Console.ReadKey();
